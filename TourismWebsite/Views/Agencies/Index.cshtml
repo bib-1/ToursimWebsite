@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TourismWebsite.Models.Agency>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Agencies</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AgencyID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgencyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgencyHeadOffice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgencyContact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgencyRatings)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyHeadOffice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyRatings)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AgencyID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AgencyID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AgencyID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

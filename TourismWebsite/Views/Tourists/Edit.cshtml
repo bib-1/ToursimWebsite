@@ -1,0 +1,49 @@
+﻿@model TourismWebsite.Models.Tourist
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Tourist</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TouristID" />
+            <div class="form-group">
+                <label asp-for="TouristName" class="control-label"></label>
+                <input asp-for="TouristName" class="form-control" />
+                <span asp-validation-for="TouristName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TouristGender" class="control-label"></label>
+                <input asp-for="TouristGender" class="form-control" />
+                <span asp-validation-for="TouristGender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TouristAge" class="control-label"></label>
+                <input asp-for="TouristAge" class="form-control" />
+                <span asp-validation-for="TouristAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TouristContact" class="control-label"></label>
+                <input asp-for="TouristContact" class="form-control" />
+                <span asp-validation-for="TouristContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
