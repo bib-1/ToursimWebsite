@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Destinations/Create
+        [Authorize(Roles = "User, Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +56,7 @@ namespace TourismWebsite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User, Administrator")]
         public async Task<IActionResult> Create([Bind("DestinationID,DestinationName,DestinationLocation,DestinationDescription,DestinationPackage")] Destination destination)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,8 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Destinations/Edit/5
+        [Authorize(Roles = "User, Administrator")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace TourismWebsite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User, Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("DestinationID,DestinationName,DestinationLocation,DestinationDescription,DestinationPackage")] Destination destination)
         {
             if (id != destination.DestinationID)
@@ -117,6 +123,7 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Destinations/Delete/5
+        [Authorize(Roles = "User, Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

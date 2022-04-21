@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,8 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Agencies/Create
+        [Authorize(Roles = "User, Administrator")]
+
         public IActionResult Create()
         {
             return View();
@@ -66,6 +69,8 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Agencies/Edit/5
+        [Authorize(Roles = "User, Administrator")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,8 @@ namespace TourismWebsite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User, Administrator")]
+
         public async Task<IActionResult> Edit(int id, [Bind("AgencyID,AgencyName,AgencyHeadOffice,AgencyContact,AgencyRatings")] Agency agency)
         {
             if (id != agency.AgencyID)
@@ -117,6 +124,8 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Agencies/Delete/5
+        [Authorize(Roles = "User, Administrator")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +146,8 @@ namespace TourismWebsite.Controllers
         // POST: Agencies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User, Administrator")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var agency = await _context.Agency.FindAsync(id);

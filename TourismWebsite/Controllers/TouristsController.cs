@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using TourismWebsite.Models;
 
 namespace TourismWebsite.Controllers
 {
+    [AllowAnonymous]
     public class TouristsController : Controller
     {
         private readonly DataContext _context;
@@ -20,12 +22,14 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Tourists
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Tourist.ToListAsync());
         }
 
         // GET: Tourists/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Tourists/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +69,7 @@ namespace TourismWebsite.Controllers
             }
             return View(tourist);
         }
+        [Authorize]
 
         // GET: Tourists/Edit/5
         public async Task<IActionResult> Edit(int? id)

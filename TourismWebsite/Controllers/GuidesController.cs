@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Guides/Create
+        [Authorize(Roles = "User, Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +56,7 @@ namespace TourismWebsite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("GuideID,GuideName,GuideGender,GuideContact,GuidingExperience")] Guide guide)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,8 @@ namespace TourismWebsite.Controllers
         }
 
         // GET: Guides/Edit/5
+        [Authorize(Roles = "User, Administrator")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -137,6 +142,7 @@ namespace TourismWebsite.Controllers
         // POST: Guides/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User, Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var guide = await _context.Guide.FindAsync(id);

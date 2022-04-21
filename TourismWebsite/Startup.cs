@@ -36,7 +36,16 @@ namespace TourismWebsite
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(
+                options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true;
+                }
+                )
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }

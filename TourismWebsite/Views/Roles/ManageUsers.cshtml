@@ -1,0 +1,39 @@
+﻿@model TourismWebsite.Models.RoleManagement
+@{
+
+    ViewData["Title"] = "Manage Users";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h2>Managing Role @Model.Role.Name</h2>
+
+<h3>Members</h3>
+<ul>
+    @foreach (var item in Model.Members)
+    {
+        <li>@item.UserName  <a asp-action="RemoveMemberFromRole" 
+                               asp-route-userId="@item.Id"
+                               asp-route-roleId="@Model.Role.Id"
+                               class="btn btn-danger"
+                               >Remove Member</a></li>
+
+
+    }
+</ul>
+<h3>Non-Members</h3>
+<ul>
+    @foreach (var item in Model.NonMembers)
+    {
+        <li>
+            @item.UserName  <a asp-action="AddMemberToRole"
+                               asp-route-userId="@item.Id"
+                               asp-route-roleId="@Model.Role.Id"
+                               class="btn btn-warning"
+                               
+                               >Add Member</a>
+    </li>
+
+
+}
+</ul>
